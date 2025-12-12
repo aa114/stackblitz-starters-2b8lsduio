@@ -14,27 +14,34 @@ A powerful draw.io-based web editor with SCADA parameter mapping capabilities fo
 
 ## Quick Start
 
+> **👉 New Here? Start with [START_HERE.md](START_HERE.md) for a 2-minute quickstart guide!**
+
 1. **Start the server**:
    ```bash
    npm start
    ```
 
-2. **Open the editor**:
-   ```
-   http://localhost:3000/webapp/index.html
-   ```
-
-3. **Test the feature**:
+2. **Try the interactive demo** (Recommended):
    ```
    http://localhost:3000/webapp/test-parameter-mapping.html
    ```
 
+3. **Or use the landing page**:
+   ```
+   http://localhost:3000/webapp/scada-editor.html
+   ```
+
+> **⚠️ Note**: `webapp/index.html` requires draw.io core files to be downloaded separately. See [QUICK_START_FIX.md](QUICK_START_FIX.md) for solutions.
+
 ## Documentation
 
+- 🚀 **[START HERE](START_HERE.md)** - 2-minute quickstart guide ⭐
+- 🔧 **[Quick Start Fix](QUICK_START_FIX.md)** - Solutions for loading issues
 - 📖 **[Complete Documentation](SCADA_PARAMETER_MAPPING.md)** - Full feature guide
-- 🚀 **[Installation Guide](INSTALLATION_GUIDE.md)** - Setup instructions
 - ⚛️ **[React Integration](REACT_INTEGRATION_EXAMPLE.md)** - React component examples
+- 📊 **[Deployment Status](DEPLOYMENT_STATUS.md)** - What's been delivered
 - 📋 **[Quick Reference](QUICK_REFERENCE.md)** - Cheat sheet
+- 🛠️ **[Installation Guide](INSTALLATION_GUIDE.md)** - Setup instructions
 
 ## How It Works
 

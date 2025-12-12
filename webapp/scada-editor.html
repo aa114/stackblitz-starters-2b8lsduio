@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4DK SCADA Editor - Quick Start</title>
+    <link rel="stylesheet" type="text/css" href="styles/parameter-mapping.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .option-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .option-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .option-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .option-card p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .info-box {
+            background: #f0f7ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 4px;
+        }
+
+        .info-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 4DK SCADA Editor</h1>
+        <p class="subtitle">Choose how you want to start creating SCADA diagrams with parameter mapping</p>
+
+        <div class="options">
+            <div class="option-card" onclick="window.open('https://app.diagrams.net', '_blank')">
+                <h3>🌐 Use Online Editor</h3>
+                <p>Open draw.io in a new tab and export SVG files with our utility</p>
+                <a href="https://app.diagrams.net" target="_blank" class="btn">Open draw.io</a>
+            </div>
+
+            <div class="option-card" onclick="window.location.href='test-parameter-mapping.html'">
+                <h3>🧪 Test Demo</h3>
+                <p>See how parameter mapping works with an interactive example</p>
+                <a href="test-parameter-mapping.html" class="btn">Try Demo</a>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h4>📖 How to Use Parameter Mapping</h4>
+            <p>Since the draw.io core files need to be downloaded separately, here's the quick workflow:</p>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <h4 style="color: #333; margin-bottom: 15px;">Method 1: Use draw.io Online + Our Utility</h4>
+            <ol style="color: #666; line-height: 2; margin-left: 20px;">
+                <li>Create your diagram at <a href="https://app.diagrams.net" target="_blank" style="color: #667eea;">app.diagrams.net</a></li>
+                <li>For each shape you want to map:
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li>Right-click → Edit Data</li>
+                        <li>Add property: <code>scada-param</code> = <code>TANK_01_LEVEL</code></li>
+                        <li>Add property: <code>scada-type</code> = <code>gradient-level</code></li>
+                        <li>Add property: <code>scada-min</code> = <code>0</code></li>
+                        <li>Add property: <code>scada-max</code> = <code>100</code></li>
+                    </ul>
+                </li>
+                <li>Export as SVG</li>
+                <li>Use our React component to load and update the SVG</li>
+            </ol>
+
+            <h4 style="color: #333; margin: 20px 0 15px 0;">Method 2: Manual SVG Editing</h4>
+            <ol style="color: #666; line-height: 2; margin-left: 20px;">
+                <li>Create diagram in any tool and export as SVG</li>
+                <li>Open SVG in text editor</li>
+                <li>Add data attributes to elements:
+                    <div class="code-block">&lt;rect
+  data-scada-param="TANK_01_LEVEL"
+  data-scada-type="gradient-level"
+  data-scada-direction="bottom-to-top"
+  data-scada-min="0"
+  data-scada-max="100"
+/&gt;</div>
+                </li>
+                <li>Use our svg-parameter-updater.js in your React app</li>
+            </ol>
+
+            <h4 style="color: #333; margin: 20px 0 15px 0;">Files You Can Use Right Now:</h4>
+            <ul style="color: #666; line-height: 2; margin-left: 20px;">
+                <li>✅ <code>js/svg-parameter-updater.js</code> - React utility for updating SVGs</li>
+                <li>✅ <code>test-parameter-mapping.html</code> - Interactive demo</li>
+                <li>✅ <code>styles/parameter-mapping.css</code> - UI styling</li>
+                <li>✅ All documentation files (SCADA_PARAMETER_MAPPING.md, etc.)</li>
+            </ul>
+        </div>
+
+        <div class="info-box" style="background: #fff3cd; border-left-color: #ffc107; margin-top: 20px;">
+            <h4 style="color: #856404;">⚠️ Note About Missing Files</h4>
+            <p style="color: #856404;">
+                The draw.io editor core files (js/bootstrap.js, js/main.js) are not included in this repository.
+                You can either use draw.io online or download the full draw.io source from
+                <a href="https://github.com/jgraph/drawio" target="_blank" style="color: #667eea;">github.com/jgraph/drawio</a>
+            </p>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap;">
+            <a href="test-parameter-mapping.html" class="btn">🧪 Try Interactive Demo</a>
+            <a href="../SCADA_PARAMETER_MAPPING.md" target="_blank" class="btn" style="background: #6c757d;">📖 Read Docs</a>
+            <a href="../REACT_INTEGRATION_EXAMPLE.md" target="_blank" class="btn" style="background: #6c757d;">⚛️ React Examples</a>
+        </div>
+    </div>
+</body>
+</html>
